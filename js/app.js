@@ -27,11 +27,17 @@ console.log(ContentOfCards);
 
  cards = toArray(cards);
 //restart icon configuration
+function resetMoves(){
+	moves = 0;
+	const moveStatus = document.querySelector('.moves');
+    moveStatus.textContent = moves ;
+}
 const restartIcon = document.querySelector('.restart')
 restartIcon.addEventListener('click',function(){
 	for(let i=0 ; i<cards.length ; i++){
 	cards[i].classList.remove('open','show','match');
 }
+resetMoves();
 openCards = [];
 cardIndex = [];
 });
