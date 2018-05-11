@@ -52,6 +52,9 @@ resetStars();
 shuffle(ContentOfCards);
 openCards = [];
 cardIndex = [];
+clearInterval(intervalId);
+totalSeconds = 0;
+intervalId = setInterval(setTime, 1000);
 });
 
 //shuffle the cards
@@ -109,6 +112,7 @@ function matchedCardsLock(index){
      numberOfMatches++;
      if(numberOfMatches === 8){
      	console.log('congratulations');
+     	clearInterval(intervalId);
      }
 }
 // function to hide not matched cards
@@ -143,7 +147,7 @@ for(let i = 0 ;i< cards.length ;i++){
     cards[i].addEventListener('click',function(){
 			if(openCards.length!==0){
 				
-				else if (openCards.length === 1){
+				if (openCards.length === 1){
 					
 				    if(cardIndex[0]!= i) {
 						openCard(cards,i);
@@ -171,4 +175,25 @@ for(let i = 0 ;i< cards.length ;i++){
 			}
 	
 })
+}
+
+// make a timer source of code : https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+var intervalId = setInterval(setTime, 1000);
+
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
 }
