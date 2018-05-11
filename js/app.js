@@ -49,6 +49,7 @@ restartIcon.addEventListener('click',function(){
 }
 resetMoves();
 resetStars();
+shuffle(ContentOfCards);
 openCards = [];
 cardIndex = [];
 });
@@ -90,6 +91,7 @@ let cardIndex = [] ;
 let match = false;
 let moves = 0 ;
 let numberOfStars = 3 ;
+let numberOfMatches = 0
 //function to display the clicked card
 function openCard(arrOfCards,index){
 	cards[index].classList.add('open','show');
@@ -104,7 +106,10 @@ function matchedCardsLock(index){
     cards[index].classList.add('match');
 	cards[cardIndex[0]].classList.remove('open','show');
 	cards[cardIndex[0]].classList.add('match');
-     match = true;
+     numberOfMatches++;
+     if(numberOfMatches === 8){
+     	console.log('congratulations');
+     }
 }
 // function to hide not matched cards
 function hideCards(){
@@ -121,7 +126,6 @@ function incrementMove(){
 function changeStar(){
 	let stars = document.querySelectorAll('.fa-star');
     stars = toArray(stars);
-    console.log(stars);
 	if(moves == 9){
 	    stars[2].classList.remove('fa-star');
 	    stars[2].classList.add('fa-star-o')
@@ -137,39 +141,34 @@ function changeStar(){
 
 for(let i = 0 ;i< cards.length ;i++){
     cards[i].addEventListener('click',function(){
-	if(openCards.length!==0){
-		if(openCards.length === 2){
-			if(i != cardIndex[0] && i != cardIndex[1]){
-				if(match === true){
-					openCards = [];
-					cardIndex = [];
-	               openCard(cards,i);
-		           holdCards(cards , i);
-		           match = false;
-		         }
-		        else{
-		        	hideCards()
-				    openCards = [];
-				    cardIndex = [] ;
-	               openCard(cards,i);
-		           holdCards(cards , i);
-		        }
-		    }
-	    }
-		else if (openCards.length === 1){
-		    if(cardIndex[0]!= i) {
+			if(openCards.length!==0){
+				
+				else if (openCards.length === 1){
+					
+				    if(cardIndex[0]!= i) {
+						openCard(cards,i);
+						holdCards(cards , i);
+						incrementMove();
+			            if(openCards[0] === openCards[1]){
+			            	matchedCardsLock(i);
+			            	 openCards = [];
+						    cardIndex = [] ;
+					   }
+					   else{
+					   	console.log('hi')
+					    	setTimeout(function hide() {
+							   hideCards();
+							   openCards = [];
+						       cardIndex = [] ;
+							},500); 
+					   }
+				    }
+			    }
+			 }
+			else{
 				openCard(cards,i);
 				holdCards(cards , i);
-				incrementMove();
-	            if(openCards[0] === openCards[1]){
-	            	matchedCardsLock(i);
-			   }
-		    }
-	    }
-	 }
-	else{
-		openCard(cards,i);
-		holdCards(cards , i);
-	}
+			}
+	
 })
 }
