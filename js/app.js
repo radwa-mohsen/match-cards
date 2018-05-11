@@ -98,19 +98,91 @@ function shuffle(array) {
 // })
 // }
 
+// let openCards = [] ;
+// let cardIndex = [] ;
+// let match = false;
+// function holdCards(arrOfCards , index){
+// 	openCards.push(cards[i].children[0].classList.item(1));
+// 	cardIndex.push(i);
+// }
+// for(let i = 0 ;i< cards.length ;i++){
+//     cards[i].addEventListener('click',function(){
+// 	if(openCards.length!==0){
+// 		if(openCards.length === 2){
+// 			if(match === true){
+// 				openCards = [];
+// 				cardIndex = [];
+//                cards[i].classList.add('open','show');
+// 	           openCards.push(cards[i].children[0].classList.item(1));
+// 	           cardIndex.push(i);
+// 	           match = false;
+// 	         }
+// 	        else{
+
+// 	        	cards[cardIndex[0]].classList.remove('open','show');
+// 			    cards[cardIndex[1]].classList.remove('open','show');
+
+// 			    openCards = [];
+// 			    cardIndex = [] ;
+//                cards[i].classList.add('open','show');
+// 	           openCards.push(cards[i].children[0].classList.item(1));
+// 	           cardIndex.push(i);
+// 	        }
+// 		}
+// 		else if (openCards.length === 1){
+// 			cards[i].classList.add('open','show');
+// 			openCards.push(cards[i].children[0].classList.item(1));
+// 			cardIndex.push(i);
+// 			console.log(openCards[0]);
+// 			console.log(openCards[1]);
+//             if(openCards[0] === openCards[1]){
+// 			cards[i].classList.add('match');
+// 			cards[cardIndex[0]].classList.remove('open','show');
+// 			cards[cardIndex[0]].classList.add('match');
+//              match = true;
+// 		   }
+
+// 	    }
+// 	 }
+// 	else{
+// 		cards[i].classList.add('open','show');
+// 		openCards.push(cards[i].children[0].classList.item(1));
+// 		cardIndex.push(i);
+// 	}
+// })
+// }
+
+let index = 0 ;
 let openCards = [] ;
 let cardIndex = [] ;
 let match = false;
+//function to display the clicked card
+function openCard(arrOfCards,index){
+	cards[index].classList.add('open','show');
+}
+//function to hold the cards symbol and it's index
+function holdCards(arrOfCards,index){
+	openCards.push(cards[index].children[0].classList.item(1));
+	cardIndex.push(index);
+}
+//function to lock the cards in open position in case of matching
+function matchedCardsLock(index){
+    cards[index].classList.add('match');
+	cards[cardIndex[0]].classList.remove('open','show');
+	cards[cardIndex[0]].classList.add('match');
+     match = true;
+}
+
 for(let i = 0 ;i< cards.length ;i++){
+
     cards[i].addEventListener('click',function(){
 	if(openCards.length!==0){
 		if(openCards.length === 2){
 			if(match === true){
 				openCards = [];
 				cardIndex = [];
-               cards[i].classList.add('open','show');
-	           openCards.push(cards[i].children[0].classList.item(1));
-	           cardIndex.push(i);
+               openCard(cards,i);
+	           holdCards(cards , i);
 	           match = false;
 	         }
 	        else{
@@ -120,30 +192,21 @@ for(let i = 0 ;i< cards.length ;i++){
 
 			    openCards = [];
 			    cardIndex = [] ;
-               cards[i].classList.add('open','show');
-	           openCards.push(cards[i].children[0].classList.item(1));
-	           cardIndex.push(i);
+               openCard(cards,i);
+	           holdCards(cards , i);
 	        }
 		}
 		else if (openCards.length === 1){
-			cards[i].classList.add('open','show');
-			openCards.push(cards[i].children[0].classList.item(1));
-			cardIndex.push(i);
-			console.log(openCards[0]);
-			console.log(openCards[1]);
+			openCard(cards,i);
+			holdCards(cards , i);
             if(openCards[0] === openCards[1]){
-			cards[i].classList.add('match');
-			cards[cardIndex[0]].classList.remove('open','show');
-			cards[cardIndex[0]].classList.add('match');
-             match = true;
+            	matchedCardsLock(i);
 		   }
-
 	    }
 	 }
 	else{
-		cards[i].classList.add('open','show');
-		openCards.push(cards[i].children[0].classList.item(1));
-		cardIndex.push(i);
+		openCard(cards,i);
+		holdCards(cards , i);
 	}
 })
 }
