@@ -33,14 +33,22 @@ function resetMoves(){
     moveStatus.textContent = moves ;
 }
 
-
+function resetStars(){
+	numberOfStars = 3;
+	let stars = document.querySelectorAll('.stars li');
+	stars = toArray(stars);
+	for (let i = 0; i < numberOfStars; i++) {
+		stars[i].children[0].classList.remove('fa-star-o');
+		stars[i].children[0].classList.add('fa-star');
+	}
+}
 const restartIcon = document.querySelector('.restart')
 restartIcon.addEventListener('click',function(){
 	for(let i=0 ; i<cards.length ; i++){
 	cards[i].classList.remove('open','show','match');
 }
 resetMoves();
-
+resetStars();
 openCards = [];
 cardIndex = [];
 });
