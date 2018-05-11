@@ -13,7 +13,6 @@ function toArray(obj) {
   return array;
 }
 ContentOfCards = toArray(ContentOfCards);
-console.log(ContentOfCards);
 
 /*
  * Display the cards on the page
@@ -111,8 +110,9 @@ function matchedCardsLock(index){
 	cards[cardIndex[0]].classList.add('match');
      numberOfMatches++;
      if(numberOfMatches === 8){
-     	console.log('congratulations');
      	clearInterval(intervalId);
+     	document.querySelector('.congrat').textContent = 'Congratulations';
+     	document.querySelector('.congrat').style.cssText = 'display : inline-block ; background-color:white ; position:fixed ; width:100% ; height:100%';
      }
 }
 // function to hide not matched cards
@@ -159,7 +159,7 @@ for(let i = 0 ;i< cards.length ;i++){
 						    cardIndex = [] ;
 					   }
 					   else{
-					   	console.log('hi')
+					   
 					    	setTimeout(function hide() {
 							   hideCards();
 							   openCards = [];
