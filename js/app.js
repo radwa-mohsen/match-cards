@@ -32,12 +32,15 @@ function resetMoves(){
 	const moveStatus = document.querySelector('.moves');
     moveStatus.textContent = moves ;
 }
+
+
 const restartIcon = document.querySelector('.restart')
 restartIcon.addEventListener('click',function(){
 	for(let i=0 ; i<cards.length ; i++){
 	cards[i].classList.remove('open','show','match');
 }
 resetMoves();
+
 openCards = [];
 cardIndex = [];
 });
@@ -78,6 +81,7 @@ let openCards = [] ;
 let cardIndex = [] ;
 let match = false;
 let moves = 0 ;
+let numberOfStars = 3 ;
 //function to display the clicked card
 function openCard(arrOfCards,index){
 	cards[index].classList.add('open','show');
@@ -104,7 +108,25 @@ function incrementMove(){
 	moves++;
 	const moveStatus = document.querySelector('.moves');
     moveStatus.textContent = moves ;
+    changeStar();
 }
+function changeStar(){
+	let stars = document.querySelectorAll('.fa-star');
+    stars = toArray(stars);
+    console.log(stars);
+	if(moves == 9){
+	    stars[2].classList.remove('fa-star');
+	    stars[2].classList.add('fa-star-o')
+        numberOfStars--;
+	}
+	else if(moves == 17){
+		stars[1].classList.remove('fa-star');
+	    stars[1].classList.add('fa-star-o');
+	    numberOfStars--;
+	}
+
+}
+
 for(let i = 0 ;i< cards.length ;i++){
     cards[i].addEventListener('click',function(){
 	if(openCards.length!==0){
