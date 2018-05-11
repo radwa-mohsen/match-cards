@@ -70,10 +70,8 @@ function shuffle(array) {
  // *  - if the list already has another card, check to see if the two cards match done
  // *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one) done
  // *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one) done
- // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one) done
  // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- 
-
 
 let index = 0 ;
 let openCards = [] ;
@@ -111,29 +109,32 @@ for(let i = 0 ;i< cards.length ;i++){
     cards[i].addEventListener('click',function(){
 	if(openCards.length!==0){
 		if(openCards.length === 2){
-			if(match === true){
-				openCards = [];
-				cardIndex = [];
-               openCard(cards,i);
-	           holdCards(cards , i);
-	           match = false;
-	         }
-	        else{
-	        	hideCards()
-			    openCards = [];
-			    cardIndex = [] ;
-               openCard(cards,i);
-	           holdCards(cards , i);
-	        }
-		}
+			if(i != cardIndex[0] && i != cardIndex[1]){
+				if(match === true){
+					openCards = [];
+					cardIndex = [];
+	               openCard(cards,i);
+		           holdCards(cards , i);
+		           match = false;
+		         }
+		        else{
+		        	hideCards()
+				    openCards = [];
+				    cardIndex = [] ;
+	               openCard(cards,i);
+		           holdCards(cards , i);
+		        }
+		    }
+	    }
 		else if (openCards.length === 1){
-            
-			openCard(cards,i);
-			holdCards(cards , i);
-			incrementMove();
-            if(openCards[0] === openCards[1]){
-            	matchedCardsLock(i);
-		   }
+		    if(cardIndex[0]!= i) {
+				openCard(cards,i);
+				holdCards(cards , i);
+				incrementMove();
+	            if(openCards[0] === openCards[1]){
+	            	matchedCardsLock(i);
+			   }
+		    }
 	    }
 	 }
 	else{
