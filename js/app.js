@@ -172,9 +172,12 @@ function matchedCardsLock(index){
 	cards[cardIndex[0]].classList.add('match');
      match = true;
 }
-
+// function to hide not matched cards
+function hideCards(){
+    	cards[cardIndex[0]].classList.remove('open','show');
+	    cards[cardIndex[1]].classList.remove('open','show');
+}
 for(let i = 0 ;i< cards.length ;i++){
-
     cards[i].addEventListener('click',function(){
 	if(openCards.length!==0){
 		if(openCards.length === 2){
@@ -186,10 +189,7 @@ for(let i = 0 ;i< cards.length ;i++){
 	           match = false;
 	         }
 	        else{
-
-	        	cards[cardIndex[0]].classList.remove('open','show');
-			    cards[cardIndex[1]].classList.remove('open','show');
-
+	        	hideCards()
 			    openCards = [];
 			    cardIndex = [] ;
                openCard(cards,i);
