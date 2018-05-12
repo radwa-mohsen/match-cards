@@ -162,6 +162,8 @@ function matchedCardsLock(index){
      numberOfMatches++;
      if(numberOfMatches === 8){
      	clearInterval(intervalId);
+    
+     	document.querySelector('.details').textContent = 'with ' + moves + ' moves and ' + numberOfStars + ' star in ' + totalSeconds + ' seconds';
      	document.querySelector('.congrat').style.cssText = 'display : block';
      }
 }
