@@ -64,16 +64,21 @@ for(let i = 0 ;i< cards.length ;i++){
 						//check if the clicked card matched with the open card or not
 			            if(openCards[0] === openCards[1]){
 			            	matchedCardsLock(i);
-			            	 openCards = [];
-						    cardIndex = [] ;
+			            	 
 					   }
 					   else{
 					   
 					    	setTimeout(function hide() {
 							   hideCards();
-							   openCards = [];
-						       cardIndex = [] ;
+							   
 							},500); 
+
+							setTimeout(function removeAnimation(){
+								cards[cardIndex[0]].classList.remove('animated','shake');
+	                            cards[cardIndex[1]].classList.remove('animated','shake');
+	                            openCards = [];
+						       cardIndex = [] ;
+							},1500);
 					   }
 				    }
 			    }
@@ -147,7 +152,7 @@ function toArray(obj) {
 }
 //function to display the clicked card
 function openCard(arrOfCards,index){
-	cards[index].classList.add('open','show','animated','rubberBand');
+	cards[index].classList.add('open','show','animated','flipInY');
 }
 //function to hold the cards symbol and it's index
 function holdCards(arrOfCards,index){
@@ -156,9 +161,16 @@ function holdCards(arrOfCards,index){
 }
 //function to lock the cards in open position in case of matching
 function matchedCardsLock(index){
-    cards[index].classList.add('match');
-	cards[cardIndex[0]].classList.remove('open','show');
-	cards[cardIndex[0]].classList.add('match');
+    cards[index].classList.remove('open','show','flipInY');
+    cards[index].classList.add('match','animated','rubberBand');
+	cards[cardIndex[0]].classList.remove('open','show','flipInY');
+	cards[cardIndex[0]].classList.add('match','animated','rubberBand');
+	setTimeout(function(){
+		    cards[index].classList.remove('animated','rubberBand');
+	        cards[cardIndex[0]].classList.remove('animated','rubberBand');
+	        openCards = [];
+			cardIndex = [] ;
+	},700)
      numberOfMatches++;
      if(numberOfMatches === 8){
      	clearInterval(intervalId);
@@ -169,8 +181,21 @@ function matchedCardsLock(index){
 }
 // function to hide not matched cards
 function hideCards(){
-    	cards[cardIndex[0]].classList.remove('open','show','animated','rubberBand');
-	    cards[cardIndex[1]].classList.remove('open','show','animated','rubberBand');
+	    cards[cardIndex[0]].classList.remove('flipInY');
+	    cards[cardIndex[1]].classList.remove('flipInY');
+	    cards[cardIndex[0]].classList.add('shake');
+	    cards[cardIndex[1]].classList.add('shake');
+	    cards[cardIndex[0]].setAttribute('style', 'background-color: red;');
+	    cards[cardIndex[1]].setAttribute('style', 'background-color: red;');
+
+        setTimeout(function hide(){
+        	cards[cardIndex[0]].classList.remove('open','show');
+	   cards[cardIndex[1]].classList.remove('open','show');
+	   	    cards[cardIndex[0]].removeAttribute('style');
+	    cards[cardIndex[1]].removeAttribute('style');
+
+	},800);
+       
 }
 // function to increment number of moves
 function incrementMove(){

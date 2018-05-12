@@ -130,3 +130,7 @@ h1 {
     border-radius: 10px;
     text-align: center;
 }
+
+.wrong{
+    background-color: red;
+}
