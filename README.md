@@ -20,5 +20,3 @@
 * get 3 stars when finish the game in 8 moves.
 * get 2 stars when finish the game in 16 moves or less.
 * get 1 star when finish the game in more than 16 moves.
-
-# match-cards
