@@ -3,19 +3,22 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Dependencies](#Dependencies)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+* open the game from [This link](https://radwa-mohsen.github.io/match-cards/).
+* open cards and try to match it.
+* make eight matches to finish the game and win.
+* try to win in less moves as possible to keep your stars.
+* if you don't like your game click in refresh to start a new game.
+* you can start new game after winning just click on New Game button.
 
-To get started, open `js/app.js` and start building out the app's functionality
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Dependencies
 
-## Contributing
+* get 3 stars when finish the game in 8 moves.
+* get 2 stars when finish the game in 16 moves or less.
+* get 1 star when finish the game in more than 16 moves.
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 # match-cards
