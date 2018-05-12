@@ -5,9 +5,9 @@
 
 
 let ContentOfCards = document.querySelectorAll('.card i');
-ContentOfCards = toArray(ContentOfCards);
+    ContentOfCards = toArray(ContentOfCards);
 let cards = document.querySelectorAll('.card');
- cards = toArray(cards);
+    cards = toArray(cards);
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -18,14 +18,14 @@ let cards = document.querySelectorAll('.card');
 
  
  
-const restartIcon = document.querySelector('.restart')
+const restartIcon = document.querySelector('.restart');
+
 restartIcon.addEventListener('click',function(){
 	reset();
 });
 
 //shuffle the cards
 ContentOfCards = shuffle(ContentOfCards);
-
 
  // * set up the event listener for a card. If a card is clicked: done
  // *  - display the card's symbol (put this functionality in another function that you call from this one) done
@@ -42,14 +42,14 @@ let cardIndex = [] ;
 let match = false;
 let moves = 0 ;
 let numberOfStars = 3 ;
-let numberOfMatches = 0
+let numberOfMatches = 0 ;
 
 // submit button to start new game
 const newGame = document.querySelector('input');
 newGame.addEventListener('click',function(){
 	reset();
 	document.querySelector('.congrat').style.cssText = 'display : none';
-} )
+} );
 
 // listen to each click on card
 for(let i = 0 ;i< cards.length ;i++){
@@ -111,18 +111,18 @@ function shuffle(array) {
 }
 //function to reset everything
 function reset(){
-for(let i=0 ; i<cards.length ; i++){
-	cards[i].classList.remove('open','show','match');
-}
-numberOfMatches=0;
-resetMoves();
-resetStars();
-shuffle(ContentOfCards);
-openCards = [];
-cardIndex = [];
-clearInterval(intervalId);
-totalSeconds = 0;
-intervalId = setInterval(setTime, 1000);
+	for(let i=0 ; i<cards.length ; i++){
+		cards[i].classList.remove('open','show','match');
+	}
+	numberOfMatches=0;
+	resetMoves();
+	resetStars();
+	shuffle(ContentOfCards);
+	openCards = [];
+	cardIndex = [];
+	clearInterval(intervalId);
+	totalSeconds = 0;
+	intervalId = setInterval(setTime, 1000);
 }
 //function to reset the number of moves to zero
 function resetMoves(){
@@ -169,32 +169,32 @@ function matchedCardsLock(index){
 		    cards[index].classList.remove('animated','rubberBand');
 	        cards[cardIndex[0]].classList.remove('animated','rubberBand');
 	        openCards = [];
-			cardIndex = [] ;
-	},700)
+			cardIndex = [];
+	},700);
      numberOfMatches++;
+     //check if he finished the game or not
      if(numberOfMatches === 8){
      	clearInterval(intervalId);
-    
      	document.querySelector('.details').textContent = 'with ' + moves + ' moves and ' + numberOfStars + ' star in ' + totalSeconds + ' seconds';
      	document.querySelector('.congrat').style.cssText = 'display : block';
      }
 }
 // function to hide not matched cards
 function hideCards(){
+	    //animation add for wrong match
 	    cards[cardIndex[0]].classList.remove('flipInY');
 	    cards[cardIndex[1]].classList.remove('flipInY');
 	    cards[cardIndex[0]].classList.add('shake');
 	    cards[cardIndex[1]].classList.add('shake');
 	    cards[cardIndex[0]].setAttribute('style', 'background-color: red;');
 	    cards[cardIndex[1]].setAttribute('style', 'background-color: red;');
-
-        setTimeout(function hide(){
+        //remove animation classes
+        setTimeout(function (){
         	cards[cardIndex[0]].classList.remove('open','show');
 	   cards[cardIndex[1]].classList.remove('open','show');
 	   	    cards[cardIndex[0]].removeAttribute('style');
 	    cards[cardIndex[1]].removeAttribute('style');
-
-	},800);
+	    },800);
        
 }
 // function to increment number of moves
@@ -204,14 +204,17 @@ function incrementMove(){
     moveStatus.textContent = moves ;
     changeStar();
 }
+//function to decrement the number of stars depends on the number of moves
 function changeStar(){
 	let stars = document.querySelectorAll('.fa-star');
     stars = toArray(stars);
+    // keep 3 stars tii make 9 moves
 	if(moves == 9){
 	    stars[2].classList.remove('fa-star');
 	    stars[2].classList.add('fa-star-o')
         numberOfStars--;
 	}
+	//keep 2 stars till make 17 moves
 	else if(moves == 17){
 		stars[1].classList.remove('fa-star');
 	    stars[1].classList.add('fa-star-o');
