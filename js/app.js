@@ -88,7 +88,7 @@ for(let i = 0 ;i< cards.length ;i++){
 				holdCards(cards , i);
 			}
 	
-})
+	});
 }
 
 
